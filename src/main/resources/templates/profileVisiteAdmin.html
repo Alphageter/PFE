@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Gestion PFE</title>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/profilestyle.css">
+</head>
+<body>
+
+	<nav>
+        <ul>
+			<li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+				<div class="main-link">
+          <li ><a th:href="@{/Admin/profile}">profil</a></li>
+		  <li ><a th:href="@{/Admin/users/categorie}">Gestion des utilisateurs</a></li>
+          <li><a th:href="@{/Admin/groupes/list}">Groupes</a></li>
+          <li><a th:href="@{/Admin/appointments}">Rendez-vous</a></li>
+		       </div>
+		    <li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+		
+        </ul>
+    </nav>
+
+	<section class="py-5 my-5">
+		<div class="container">
+			<h1 class="mb-5">Profil PFE</h1>
+			<div class="messages">
+				<div th:if="${messagfail}" class="alert alert-fail text-center">
+					[[${messagfail}]]
+				  </div>
+				<div th:if="${messagesucces}" class="alert alert-success text-center">
+					[[${messagesucces}]]
+				  </div>
+			</div>
+			
+			<div class="bg-white shadow rounded-lg d-block d-sm-flex">
+				<div class="profile-tab-nav border-right">
+					<div class="p-4">
+						<div class="img-circle text-center mb-3">
+							<img th:src="@{${userdata.image}}" alt="Image" class="shadow">
+						</div>
+						<h4 class="text-center" ><span th:text="${userdata.name}"></span>
+							<span th:text="${userdata.lastname}"></span>
+						</h4>
+					</div>
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="account-tab" data-toggle="pill" href="#accountinfo" role="tab" aria-controls="accountinfo" aria-selected="true">
+							<i class="fa fa-home text-center mr-1"></i> 
+							Les Données
+						</a>
+						<a class="nav-link" id="notification-tab" data-toggle="pill" href="#notification" role="tab" aria-controls="notification" aria-selected="false">
+							<i class="fa fa-envelope text-center mr-1"></i> 
+							Contacter
+						  </a>
+					</div>
+				</div>
+				<div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+					<div class="tab-pane fade show active" id="accountinfo" role="tabpanel" aria-labelledby="account-tab">
+						<h3 class="mb-4">Les Données</h3>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label> Nom</label>
+								  	<label class="form-control" th:text="${userdata.name}"></label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Prenom</label>
+								  	<label class="form-control" th:text="${userdata.lastname}"></label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Email</label>
+								  	<label class="form-control" th:text="${userdata.email}"></label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Role</label>
+								  	<label class="form-control" th:text="${userdata.role}"></label>
+								</div>
+							</div>
+
+							<div th:if="${filier}" class="col-md-6">
+								<div class="form-group">
+								  	<label>Filière</label>
+								  	<label class="form-control" th:text="${filier}"></label>
+								</div>
+							</div>	
+
+							<div th:if="${napoge}" class="col-md-6">
+								<div class="form-group">
+								  	<label>N_apogee</label>
+								  	<label class="form-control" th:text="${napoge}"></label>
+								</div>
+							</div>	
+							
+						</div>
+					
+					 </div>
+					 <div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
+						<h3 class="mb-4">Message</h3>
+						<form th:action= "@{/Admin/contacter}" method="post"  id="myForm">
+							<input type="hidden" name="ID" th:value="${userdata.id}" />
+
+							<div class="form-group">
+								<label for="subject">Sujet:</label>
+								<input type="text" id="sujet" name="sujet" required />	
+						  </div>
+
+						<div class="form-group">
+							<textarea class="form-control" id="report" name="report" maxlength="150"  rows="4" cols="150" required> 
+
+							</textarea>
+					  </div>
+
+						<div class="form-group">
+							<input type="submit" value="Envoyer" class="btn btn-success" />	
+					  </div>
+						</form>
+						
+						</div>
+					</div>
+					
+				</div>
+		</div>
+		
+	</section>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

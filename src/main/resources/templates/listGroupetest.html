@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion PFE</title>
+</head>
+<body>
+    <p><a href="#my_form2"> my second part</a></p>
+    <p><a href="#my_form3"> my therrd part</a></p>
+    <h1>Liste des groupes From1</h1>
+    <div id="my_form1">
+        <form th:action="@{/my-form1}" method="post" >
+        <input type="submit" value="submit">
+        </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Type de travail</th>
+                <th>Encadrant</th>
+                <th>Matière</th>
+                <th>Statut</th>
+               
+            </tr>
+        </thead>
+          <tbody>
+            <tr>
+               <td> my tabel1</td>
+               <td> my tabel1</td>
+               <td> my tabel1</td>
+               <td> my tabel1</td>
+               <td> my tabel1</td>
+            </tr>
+            <tr>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+             </tr>
+             <tr>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+             </tr>
+             <tr>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+             </tr>
+             <tr>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+                <td> my tabel1</td>
+             </tr>
+          </tbody>
+    </table>
+</div>
+<pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+
+
+<div id="my_form2">
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Type de travail</th>
+                <th>Encadrant</th>
+                <th>Matière</th>
+                <th>Statut</th>
+               
+            </tr>
+        </thead>
+          <tbody>
+            <tr>
+               <td> my tabel2</td>
+               <td> my tabel2</td>
+               <td> my tabel2</td>
+               <td> my tabel2</td>
+               <td> my tabel2</td>
+            </tr>
+            <tr>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+             </tr>
+             <tr>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+             </tr>
+             <tr>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+             </tr>
+             <tr>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+                <td> my tabel2</td>
+             </tr>
+          </tbody>
+
+    </table>
+
+    <h1>Liste des groupes From2</h1>
+        <form th:action="@{/my-form2}" method="post" >
+        <input type="submit" value="submit">
+        </form>
+</div>
+
+<pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</pre>
+
+<div id="my_form3">
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Type de travail</th>
+                <th>Encadrant</th>
+                <th>Matière</th>
+                <th>Statut</th>
+               
+            </tr>
+        </thead>
+          <tbody>
+            <tr>
+               <td> my tabel3</td>
+               <td> my tabel3</td>
+               <td> my tabel3</td>
+               <td> my tabel3</td>
+               <td> my tabel3</td>
+            </tr>
+            <tr>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+             </tr>
+             <tr>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+             </tr>
+             <tr>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+             </tr>
+             <tr>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+                <td> my tabel3</td>
+             </tr>
+          </tbody>
+    </table>
+    <h1>Liste des groupes From3</h1>
+    
+        <form th:action="@{/my-form3}" method="post" >
+        <input type="submit" value="submit">
+        </form>
+</div>
+
+
+
+<!-- <script>
+  var hash = window.location.hash;
+  if (hash === '#my-form3') {
+    // scroll to the form
+    document.querySelector('#my-form3').scrollIntoView();
+    // show a message to follow the next step
+    alert('Please fill out the form to continue.');
+  }
+</script> -->
+</body>
+</html>

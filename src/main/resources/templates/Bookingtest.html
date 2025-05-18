@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Booking</title>
+</head>
+<body>
+    <h1>Admin Booking</h1>
+
+    <form th:action="@{/admin/save-booking}" method="post">
+        <label for="filier">Filier:</label>
+        <select id="filier" name="filier">
+            <option value="SMI">SMI</option>
+            <option value="SESI">SESI</option>
+            <!-- Add more filier options if needed -->
+        </select>
+        
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="startDate">
+        
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="endDate">
+        
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/loginstyle.css">
+    <!-- <link rel="stylesheet" th:href="@{/loginstyle.css}"> -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>Login PFE</title>
+
+</head>
+<body>
+    <div class="image-overlay"></div>
+   <div class="box">
+    <div class="container">
+
+        <div class="top">
+            
+            <header>Login</header>
+
+            <form th:action="@{/login/check}" method="post">
+                <div class="messages">
+                    <div th:if="${errorMessage}" class="alert alert-fail text-center">
+                       <p th:text="${errorMessage}" id=""></p>
+                      </div>
+                    <div th:if="${messagesucces}" class="alert alert-success text-center">
+                       <p th:text="${messagesucces}" id=""></p>
+                      </div>
+                    </div>
+
+                
+                
+                <div class="input-field">
+                    <input type="text" class="input" placeholder="Username" id="" name="username" required>
+                    <i class='bx bx-user' ></i>
+                </div>
+            
+                <div class="input-field">
+                    <input type="Password" class="input" placeholder="Password" id="" name="password" minlength="8" required>
+                    <i class='bx bx-lock-alt'></i>
+                </div>
+            
+                <div class="input-field">
+                    <input type="submit" class="submit" value="Login" id="">
+
+                    <span  class="input_link"  ><a th:href="@{/validation}">Validez Votre Compte </a></span>
+                </div>
+            
+                
+            </form>
+    </div>
+</div>  
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF_8">
+    <title>Gestion PFE</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/newuserstyle.css" type="text/css">
+    
+  </head>
+  <body>
+    <nav>
+      <ul>
+    <li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+    <div class="main-link">
+        <li ><a th:href="@{/Etudiant/profile}">Profil</a></li>
+          <li class="active"><a th:href="@{/Etudiant/Groupe}">Mon PFE</a></li>
+        <li><a th:href="@{/Etudiant/appointment}">rendez-vous</a></li>
+        <li ><a th:href="@{/Etudiant/showreportform}"> <i class="fa fa-file-text-o"></i> Declarer</a></li>
+
+     </div>
+    <li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+    
+      </ul>
+  </nav>
+
+     
+
+    <div class="form-container">
+      <div class="messages">
+        <div th:if="${messagfail}" class="alert alert-fail text-center">
+            [[${messagfail}]]
+          </div>
+          <div th:if="${messagesucces}" class="alert alert-success text-center">
+            [[${messagesucces}]]
+          </div>
+      </div>
+      
+          <h2>Créer un nouveau Groupe PFE</h2>
+
+      <!-- Form for entering Groupe name and type of work and first Etudiant is email -->
+
+      <div th:if="${step == 1}">
+      <form th:action="@{/Etudiant/createGroupe}" method="post"  >
+        <input type="hidden"  id="step" name="step" value="1">
+        <div class="form-field">
+          <label for="groupeName">Nom de Groupe</label>
+          <input type="text"  id="groupeName" name="name" required>
+        </div>
+        <div class="form-field">
+          <label for="typeofwork">Type of Work:</label>
+            <select id="typeofwork" name="typeofwork" required>
+              <option value="">Sélectionnez votre type de travail</option>
+                <option value="individual">Individuel(e)</option>
+                <option value="in Group">En groupe</option>
+            </select>
+        </div>
+        <div class="form-field">
+          <div class="form-field">
+            <label for="etudiantEmail">Etudiant Email:</label>
+            <input type="email"  id="etudiantEmail" name="email1"  required> 
+          </div>
+          
+       
+        <button type="submit">SUIVANT<i class="fa fa-chevron-right"></i></button>
+      </div>
+      </form>
+      </div>
+
+       <!-- Form for selecting second Etudiant if tyofwork equal in Group if not we skipe to step 3-->
+      
+       <div th:if="${step == 2}">
+        <form th:action="@{/Etudiant/createGroupe}" method="post" >
+          <input type="hidden"  id="step" name="step" value="2">
+          <div class="form-field">
+            <label for="etudiantEmail2">Etudiant Email:</label>
+            <input type="email"  id="etudiantEmail2" name="email2"  required>
+          </div>
+          <div class="form-field">
+        
+        <button type="submit">SUIVANT <i class="fa fa-chevron-right"></i></button>
+      </div>
+      </form>
+      </div>
+ 
+      <!-- STEP 3    -->
+
+    <div th:if="${step == 3}">
+      <form th:action="@{/Etudiant/createGroupe}" method="post" >
+        <input type="hidden"  id="step" name="step" value="3">
+        <div class="form-field">
+          <label for="encadrant">Encadrant:</label>
+            <select id="encadrantID" name="encadrantID" required >
+              <option value="">Sélectionnez votre Encadrant</option>
+                <option th:each="encadrant : ${encadrants}" th:value="${encadrant.id}" th:text="${encadrant.name + ' ' + encadrant.lastname}"></option>              
+            </select>
+          </div>
+        <div class="form-field">
+          
+        <button type="submit">Demander <i class="fa fa-chevron-right"></i></button>
+        </div>
+      </form>
+    </div>
+
+     <!-- STEP 4   -->
+
+<div th:if="${step == 4}">
+
+  <h2>Sélectionnez un sujet ou suggérez votre sujet</h2>
+<!-- STEP 4 : selection les sujets de Encadrant   -->
+
+  <form th:action="@{/Etudiant/createGroupe}" method="post" >
+    <input type="hidden"  id="step" name="step" value="4">
+
+      <h2>Sujets:</h2>
+      <div class="form-field">
+      <table>
+          <thead>
+              <tr>
+                  <th>Sujets Name</th>
+                  <th>Language</th>
+                  <th>fichier PDF</th>
+                  <th>Sélectionner</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr th:each="subject : ${subjects}">
+                  <td th:text="${subject.name}"></td>
+                  <td th:text="${subject.language}"></td>
+                  <td><a th:href="@{'/Etudiant/download/subject/' + ${subject.id}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Télécharger PDF</a></td>
+                  <td><input type="radio"  name="subjectID" th:value="${subject.id}" required ></td>
+              </tr>
+             
+          </tbody>
+      </table>
+    </div>
+    <div class="form-field">  
+      <button type="submit">Selecioner <i class="fa fa-plus"></i></button>
+    </div>
+  </form>
+
+  <!-- Suggestion un nouvau sujet -->
+
+  <form th:action="@{/Etudiant/savesujet}" method="post"  enctype="multipart/form-data">
+    <div class="form-field">
+      <label for="name">Titre :</label>
+      <input type="text"  id="name" name="name" required>
+    </div>
+    <div class="form-field">
+      <label for="lastname">Language :</label>
+      <div th:if="${SMI==1}">
+      <select class="form-control" id="language" name="language" required> 
+        <option value="Java">Java</option>
+        <option value="PHP">PHP</option> 
+        <option value="JavaScript">JavaScript</option>
+        <option value="C#">C#</option> 
+        <option value="C++">C++</option>
+        <option value="Linux">Linux</option>
+        <option value="Python">Python</option>
+      </select>
+    </div>
+     
+    <div th:if="${SMI==2}">
+     <select id="language" name="language" required>
+       <option value="">Select language</option>
+       <option value="Francais">Francais</option>
+       <option value="Anglais" >Anglais</option>
+       <option value="Arabe" >Arabe</option>
+       
+     </select>
+   </div>
+    </div>
+    <div class="form-field">
+      <label for="email">PDF FILE</label>
+      <input type="file"  id="file" name="file"  accept=".pdf" required>
+    </div>
+    
+    <div class="form-field">
+      <input type="submit" value="Creer Sujet">
+    </div>
+  </form>
+</div>
+
+
+  <!-- STEP 5    -->
+
+  <div th:if="${step == 5}">
+    <div th:if="${messagefinfo}" class="alert alert-fail text-center">
+      [[${messagefinfo}]]
+    </div>
+  </div>
+  
+
+            
+    </div> 
+
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion PFE</title>
+</head>
+<body>
+    <h1>Create a new Groupe</h1>
+
+    <!-- Form for entering Groupe name and type of work -->
+    <div th:if="${step == 1}">
+        <form th:action="@{/Admin/createGroupe}" method="post">
+            <label for="groupeName">Groupe Name:</label>
+            <input type="text" id="groupeName" name="name" required><br><br>
+            
+            <label for="typeofwork">Type of Work:</label>
+            <select id="typeofwork" name="typeOfWork">
+                <option value="individual">Individual</option>
+                <option value="in Group">In Group</option>
+            </select><br><br>
+            
+            <button type="submit">Next</button>
+        </form>
+    </div>
+
+    <!-- Form for selecting Etudiant -->
+    <div th:if="${step == 2}">
+        <form th:action="@{/Admin/createGroupe}" method="post">
+            <label for="etudiantEmail">Etudiant Email:</label>
+            <input type="email" id="etudiantEmail" name="etudiantEmail" required><br><br>
+            
+            <button type="submit">Next</button>
+        </form>
+    </div>
+
+    <!-- Form for selecting Encadrant -->
+    <div th:if="${step == 3}">
+        <form th:action="@{/Admin/createGroupe}" method="post">
+            <label for="encadrant">Encadrant:</label>
+            <select id="encadrant" name="encadrant" required>
+                <option th:each="encadrant : ${encadrants}" th:value="${encadrant.id}" th:text="${encadrant.fullName}"></option>
+            </select><br><br>
+            
+            <button type="submit">Create</button>
+        </form>
+    </div>
+
+    <!-- Success or error message -->
+    <div th:if="${message}">
+        <p th:text="${message}" th:class="${success ? 'success' : 'error'}"></p>
+    </div>
+</body>
+</html>

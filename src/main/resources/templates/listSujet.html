@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion PFE </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/usersstyle.css">
+</head>
+
+
+<body>
+  <nav>
+    <ul>
+  <li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+  <div class="main-link">
+        <li><a th:href="@{/Encadrant/profile}">Profil</a></li>
+        <li ><a th:href="@{/Encadrant/Groupes}">Mes Groupes</a></li>
+     <li  class="active"><a th:href="@{/Encadrant/Sujets}">Mes Sujets</a></li>
+     <li ><a th:href="@{/Encadrant/resources}">Mes Ressources</a></li>
+     <li ><a th:href="@{/Encadrant/showreportform}"> <i class="fa fa-file-text-o"></i> Declarer</a></li>
+
+</div>
+<li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+    </ul>
+</nav>
+    
+    <div class="container-fluid text-center">
+        <div><h1>Mes Sujets de PFE</h1></div>
+       
+        <div class="m-2">
+            <a class="h3" th:href="@{/Encadrant/newsujet}"><i class="fa fa-plus  text-center mr-1"></i>Ajouter nouvel Sujet</a>
+        </div>   
+        </div>
+        <div class="float-right m-2">
+            <form class="form-inline" th:action="@{/Encadrant/searchsujet}" method="post">
+              
+                 
+              <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search" aria-label="Search" name="search" required>
+              <button class="btn btn-outline-success my-2 my-sm-0 search-button" type="submit" required>
+                <i class="fa fa-search  text-center mr-1"></i> Search</button>
+            </form>
+          </div>
+        <div class="messages">
+        <div th:if="${messagfail}" class="alert alert-fail text-center">
+            [[${messagfail}]]
+          </div>
+        
+        <div th:if="${messagesucces}" class="alert alert-success text-center">
+            [[${messagesucces}]]
+          </div>
+      </div>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Language</th>
+                <th scope="col">sélectionner par</th>
+                <th scope="col">Fichier PDF</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="sujet : ${listsujets}">
+                <tr>
+                    <td th:text="${sujet.id}" ></td>
+                    <td th:text="${sujet.name}" ></td>
+                    <td th:text="${sujet.language}" ></td>
+                    <td th:text="${sujet.timesSelected} + ' Candidat (e)'" > </td>
+                    <td ><a th:href="@{'/Encadrant/download/subject/' +${sujet.id}}">View PDF</a> </td>                   
+                    <td>
+                      <a class="edit-button" th:href="@{'/Encadrant/editSujet/' + ${sujet.id}}" > <i class="fa fa-edit text-center mr-1"></i>Edit</a>
+                      <a class="delete-button" th:href="@{'/Encadrant/deleteSujet/' + ${sujet.id}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce sujet?');">
+                       <i class="fa fa-trash text-center mr-1"></i> Delete</a>
+                    </td>
+                  </tr>
+                </th:block>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

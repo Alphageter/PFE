@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion PFE </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/usersstyle.css">
+</head>
+
+
+<body>
+  <nav>
+    <ul>
+  <li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+  <div class="main-link">
+      <li ><a th:href="@{/Etudiant/profile}">Profil</a></li>
+        <li><a th:href="@{/Etudiant/Groupe}">Mon PFE</a></li>
+  <li class="active"><a th:href="@{/Etudiant/appointment}">rendez-vous</a></li>
+  <li ><a th:href="@{/Etudiant/showreportform}"> <i class="fa fa-file-text-o"></i> Declarer</a></li>
+
+   </div>
+  <li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+  
+    </ul>
+</nav>
+
+    
+    <div class="container-fluid text-center">
+        <div><h1>Réservez votre date de soutenance </h1></div> 
+        </div>
+    
+        <div class="messages">
+        <div th:if="${messagfail}" class="alert alert-fail text-center">
+            [[${messagfail}]]
+          </div>
+        
+        <div th:if="${messagesucces}" class="alert alert-success text-center">
+            [[${messagesucces}]]
+          </div>
+      </div>
+
+
+      <div th:if="${votrerv}" class=" alert-success text-center">
+        <h1 th:text="${votrerv}"></h1>
+      </div>
+  </div>
+  <div th:if="${listbookings}">
+    <table class="tablerv calendar-table">
+      <thead class="table-dark">
+          <tr>
+              <th scope="col" colspan="7">Dates disponibles</th>
+          </tr>
+      </thead>
+      <tbody>
+
+          <th:block th:each="booking  : ${listbookings}">
+              <tr >
+                <td class="table-cell calendar-cell">
+                  <a  th:href="@{'/Etudiant/selecttime/' + ${booking.id}}" th:text="${booking.date}" class="selectdate"></a>
+           </td>
+              </tr>
+              
+          </th:block>
+ 
+      </tbody>
+  </table>
+</div>
+<div th:unless="${votrerv}" >
+<div th:unless="${listbookings}" >
+  <h1 >il n'y a pas encore de rendez-vous disponible</h1>
+  <div class="image_at_center">
+  <img src="/images/norendezvous.jpg" alt="your image">
+</div>
+</div>
+</div>
+  
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF_8">
+    <title>Gestion PFE</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/newuserstyle.css" type="text/css">
+    
+  </head>
+  <body>
+
+    <nav>
+      <ul>
+    <li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+    <div class="main-link">
+          <li><a th:href="@{/Admin/profile}">Profil</a></li>
+          <li ><a th:href="@{/Admin/users/categorie}">Gestion des utilisateurs</a></li>
+          <li><a th:href="@{/Admin/groupes/list}">Groupes</a></li>
+          <li class="active"><a th:href="@{/Admin/appointments}">Rendez-vous</a></li>
+  </div>
+    <li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+      </ul>
+  </nav>
+
+    <div class="form-container">
+      <div class="messages">
+        <div th:if="${messagfail}" class="alert alert-fail text-center">
+            [[${messagfail}]]
+          </div>
+          <div th:if="${messagesucces}" class="alert alert-success text-center">
+            [[${messagesucces}]]
+          </div>
+          </div>
+      
+      <form th:action="@{/Admin/saveRV}" method="post" >
+        <div class="form-field">
+          <label for="filier">Filier:</label>
+          <select id="filier" name="filier" required>
+            <option value="">Sélectionnez le filière</option>
+            <option th:each="filier : ${listFilier}" th:value="${filier}" th:text="${filier}"></option>              
+          
+          </select>
+          
+        </div>
+        <div class="form-field">
+          <label for="startDate">Date de début:</label>
+        <input type="date" id="startDate" name="startDate" required>
+        </div>
+
+        <div class="form-field">
+          <label for="endDate">Date de fin:</label>
+          <input type="date" id="endDate" name="endDate" required>
+        </div>
+
+        <div class="form-field">
+          <input type="submit" value="sauvegarder">
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

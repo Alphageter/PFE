@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/categorie.css">
+   
+
+    <title>Gestion PFE</title>
+
+</head>
+<body>
+    <nav>
+        <ul>
+			<li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+			<div class="main-link">
+            <li><a th:href="@{/Admin/profile}">Profil</a></li>
+        <li><a th:href="@{/Admin/users/categorie}">Gestion des utilisateurs</a></li>
+            <li><a th:href="@{/Admin/groupes/list}">Groupes</a></li>
+            <li  class="active"><a th:href="@{/Admin/appointments}">Rendez-vous</a></li>
+		</div>
+			<li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+        </ul>
+    </nav>
+    
+
+    
+<div class="container">
+    
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card p-0">
+                <a th:href="@{/Admin/proposeRV}">
+                <div class="card-image">
+                    <img src="/images/bookingappointment.jpg" alt="">
+                </div>
+                <div class="card-content d-flex flex-column align-items-center">
+                    <h4 class="pt-2">INSÉRER UN RENDEZ-VOUS</h4>
+                    <h5>nouvelle date de rendez-vous</h5>
+                </div>
+            </a>
+            </div>
+        </div><div class="col-lg-4">
+            <div class="card p-0">
+                <a th:href="@{/Admin/listrendezvous}">
+                <div class="card-image">
+                    <img src="/images/listappointment.jpg" alt="">
+                </div>
+                <div class="card-content d-flex flex-column align-items-center">
+                    <h4 class="pt-2">Rendez-VOUS RÉSERVÉ </h4>
+                    <h5> liste des rendez-vous réservé </h5>
+                </div>
+            </a>
+            </div>
+        </div><div class="col-lg-4">
+            <div class="card p-0">
+                <a th:href="@{/Admin/modifierRV}">
+                <div class="card-image">
+                    <img src="/images/Modificationappointment.jpg" alt="">
+                </div>
+                <div class="card-content d-flex flex-column align-items-center">
+                    <h4 class="pt-2">MODIFIER UN RENDEZ-VOUS</h4>
+                    <h5>modification des rendez-vous disponible</h5>
+                </div>
+            </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF_8">
+    <title>Gestion PFE</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/newuserstyle.css" type="text/css">
+    
+  </head>
+  <body>
+    <nav>
+      <ul>
+    <li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+    <div class="main-link">
+          <li><a th:href="@{/Admin/profile}">Profil</a></li>
+          <li class="active"><a th:href="@{/Admin/users/categorie}">Gestion des utilisateurs</a></li>
+          <li><a th:href="@{/Admin/groupes/list}">Groupes</a></li>
+          <li><a th:href="@{/Admin/appointments}">Rendez-vous</a></li>
+  </div>
+    <li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+      </ul>
+  </nav>
+    <div class="form-container">
+      <h2>[[${pageTitle}]]</h2>
+      <form th:action="@{/Admin/editEncadrant}" method="post" th:object="${encadrant}">
+
+        <input type="hidden" th:field="*{id}" id="name" name="name" required>
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input type="text" th:field="*{name}" id="name" name="name" required>
+        </div>
+        <div class="form-field">
+          <label for="lastname">Lastname</label>
+          <input type="text"  th:field="*{lastname}" id="lastname" name="lastname" required>
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" th:field="*{email}" id="email" name="email" required>
+        </div>
+        <div class="form-field"> <label for="option">Filière</label>
+          <select name="filier" id="option" required> 
+           <option value="" selected disabled>sélectionnez vous une Filière</option>
+            <option value="SMI">SMI</option>
+            <option value="SMA">SMA</option>
+            <option value="SMP">SMP</option>
+            <option value="SMC">SMC</option>
+            <option value="SVI">SVI</option> 
+            <option value="STU">STU</option> 
+         </select>
+        </div>
+        <div class="form-field">
+          <label for="password">Password</label>
+          <input type="password" th:field="*{password}" id="password" name="password" required>
+        </div>
+        <div class="form-field">
+          <input type="submit" value="Update User">
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

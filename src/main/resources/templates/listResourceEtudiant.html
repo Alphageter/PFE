@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF_8">
+    <title>Gestion PFE </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/newuserstyle.css" type="text/css">
+    
+  </head>
+  <body>
+
+    <nav>
+      <ul>
+    <li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+    <div class="main-link">
+        <li ><a th:href="@{/Etudiant/profile}">Profil</a></li>
+          <li class="active"><a th:href="@{/Etudiant/Groupe}">Mon PFE</a></li>
+    <li><a th:href="@{/Etudiant/appointment}">rendez-vous</a></li>
+    <li ><a th:href="@{/Etudiant/showreportform}"> <i class="fa fa-file-text-o"></i> Declarer</a></li>
+
+     </div>
+    <li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+    
+      </ul>
+  </nav>
+
+    <div class="form-container">
+      <div class="messages">
+        <div th:if="${messagfail}" class="alert alert-fail text-center">
+            [[${messagfail}]]
+          </div>
+          <div th:if="${messagesucces}" class="alert alert-success text-center">
+            [[${messagesucces}]]
+          </div>
+      </div>
+      
+          <h1>Ressources  :</h1>
+      <!-- Form for updating Groupe name and type of work and list of Etudiants is email -->
+      
+      <hr>
+      <h3>les Documents : </h3>
+      <div th:if="${listdocuments}">
+          <div class="form-field">
+            <ul class="resource-list">
+              
+                <!-- Iterate over the list of document subjects -->
+                <th:block th:each="document : ${listdocuments}">
+                  <li>
+                    
+                    <a th:href="@{'/Etudiant/download/subject/' +${document.id}}" th:text="${document.name}"> <i class="fa fa-file-pdf-o"></i> Subject Name</a>
+                  </li>
+                </th:block>
+              
+          </ul>
+          </div>
+      </div>
+      <div th:unless="${listdocuments}">
+        <div class="form-field">
+          <h2>Aucun document n'a été téléchargé</h2>
+        </div>
+      </div>
+
+          <hr>
+      <h3>les lines : </h3>
+         
+      <div th:if="${listlines}">
+          <div class="form-field">
+            <ul class="resource-list">
+              
+                <!-- Iterate over the list of document subjects -->
+                <th:block th:each="line : ${listlines}">
+                  <li>
+                    <i class="fa fa-external-link"></i>
+                    <a th:href="${line.pdfFile}" target="_blank" th:text="${line.name}">Subject Name</a>
+                  </li>
+                </th:block>        
+          </ul>
+          </div>
+        </div>
+        <div th:unless="${listlines}">
+          <div class="form-field">
+            <h2>Aucun Line n'a été téléchargé</h2>
+          </div>
+        </div>
+          
+      </div>
+      
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion PFE </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/usersstyle.css">
+</head>
+
+
+<body>
+  <nav>
+    <ul>
+  <li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+  <div class="main-link">
+      <li ><a th:href="@{/Encadrant/profile}">Profil</a></li>
+        <li class="active"><a th:href="@{/Encadrant/Groupes}">Mes Groupes</a></li>
+        <li><a th:href="@{/Encadrant/Sujets}">Mes Sujets</a></li>
+        <li ><a th:href="@{/Encadrant/resources}">Mes ressources</a></li>
+        <li ><a th:href="@{/Encadrant/showreportform}"> <i class="fa fa-file-text-o"></i> Declarer</a></li>
+
+</div>
+<li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+    </ul>
+</nav>
+    
+    <div class="container-fluid text-center">
+        <div><h1> Mes Groupes</h1></div>
+       
+         
+        </div>
+        <div class="float-right m-2">
+            <form class="form-inline" th:action="@{/Encadrant/searchGroupe}" method="post">
+              <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search" aria-label="Search" name="search" required>
+              <button class="btn btn-outline-success my-2 my-sm-0 search-button" type="submit" required>
+                <i class="fa fa-search  text-center mr-1"></i> Search</button>
+            </form>
+          </div>
+        <div class="messages">
+        <div th:if="${messagfail}" class="alert alert-fail text-center">
+            [[${messagfail}]]
+          </div>
+        
+        <div th:if="${messagesucces}" class="alert alert-success text-center">
+            [[${messagesucces}]]
+          </div>
+      </div>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nom</th>
+                <th scope="col">type de travail</th>
+                <th scope="col">statut</th>
+                <th scope="col">Filière</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="groupe : ${listgroupes}">
+                <tr>
+                    <td>[[${groupe.id}]]</td>
+                    <td>[[${groupe.name}]]</td>
+                    <td>[[${groupe.typeOfWork}]]</td>                  
+                    <td>[[${groupe.status}]]</td> 
+                    <td>[[${groupe.filier}]]</td>                
+                    <td>
+                      <div th:if="${groupe.autorisation == false}">
+                        <a class="edit-button" th:href="@{'/Encadrant/autoriserGroupe/' + ${groupe.id}}" >
+                          <i class="fa fa-check-square text-center mr-1"></i>Autoriser</a>
+                      </div>
+                      <a class="more-button" th:href="@{'/Encadrant/moreinfoGroupe/' + ${groupe.id}}" >
+                        <i class="fa fa-info-circle text-center mr-1"></i>Plus info...</a>
+                    </td>
+                  </tr>
+                </th:block>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

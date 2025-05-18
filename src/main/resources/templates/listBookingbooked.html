@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion PFE </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/usersstyle.css">
+</head>
+
+
+<body>
+  <nav>
+    <ul>
+  <li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+  <div class="main-link">
+        <li><a th:href="@{/Admin/profile}">Profil</a></li>
+    <li ><a th:href="@{/Admin/users/categorie}">Gestion des utilisateurs</a></li>
+        <li><a th:href="@{/Admin/groupes/list}">Groupes</a></li>
+        <li class="active"><a th:href="@{/Admin/appointments}">Rendez-vous</a></li>
+</div>
+  <li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+    </ul>
+</nav>
+    
+    <div class="container-fluid text-center">
+        <div><h1>Gestion des rendez-vous réservés</h1></div>
+       
+        
+        </div>
+        <div class="float-right m-2">
+            <form class="form-inline" th:action="@{/Admin/searchBookingbooked}" method="post">         
+              <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search" aria-label="Search" name="search" required>
+              <button class="btn btn-outline-success my-2 my-sm-0 search-button" type="submit" required>
+                <i class="fa fa-search  text-center mr-1"></i> Search</button>
+            </form>
+          </div>
+        <div class="messages">
+        <div th:if="${messagfail}" class="alert alert-fail text-center">
+            [[${messagfail}]]
+          </div>
+        
+        <div th:if="${messagesucces}" class="alert alert-success text-center">
+            [[${messagesucces}]]
+          </div>
+      </div>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Nome de groupe</th>
+                <th scope="col">Filière</th>
+                <th scope="col">Date</th>
+                <th scope="col">H</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="booking : ${listBookings}">
+                <tr>
+                    <td th:text="${booking.groupname}"></td>
+                    <td th:text="${booking.filierbooking}"></td>
+                    <td th:text="${booking.date}"></td>
+                    <td th:text="${booking.time}"></td>
+                    <td>
+                      <a class="delete-button" th:href="@{'/Admin/canselBooking/' + ${booking.id}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer les données?');">
+                        <i class="fa fa-trash text-center mr-1"></i> Annuler</a>
+                    </td>
+                  </tr>
+                </th:block>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

@@ -1,0 +1,363 @@
+body {
+  min-height: 100vh;
+  background-image: linear-gradient(to bottom, #00042856, #00468371), url("images/fst_background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: "Roboto", sans-serif;
+}
+nav {
+  /* background-color:linear-gradient(to bottom, #010101f2, #0717f3e3); */
+  overflow: hidden;
+  justify-content: space-between;
+  padding: 10px;
+  position: relative;
+}
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+
+}
+nav.main-link{
+  align-items: center;
+  text-align: center;
+}
+nav li.logo img
+{    
+  margin-right: auto;
+  width: 150px;
+  height: 100px;
+}
+nav li.logout {
+  margin-left: auto;
+}
+nav ul li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  background-color: #0B6DA2;
+  border-radius: 20px;
+}
+
+nav li a:hover {
+  background-color: #ddd;
+  color: black;
+}
+nav ul li.active a {
+  background-color: #ddd;
+  color: black;  
+}
+
+
+
+h1 {
+    font-size: 36px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+.float-right {
+    float: right;
+    margin-bottom: 20px;
+}
+
+
+.form-field {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form-field label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #fff9f9;
+  margin-right: 50px;
+}
+
+.form-field select {
+  width: 200px;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+  color: #333;
+  appearance: none;
+  background-color: #fff;
+  cursor: pointer;
+  margin-left: 100px;
+}
+
+.form-field select:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px #4CAF50;
+}
+
+.search-input {
+    width: 250px;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.search-input::placeholder {
+    color: #aaa;
+}
+
+.search-button {
+    background-color: #999;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.search-button:hover {
+    background-color: #777;
+}
+
+.m-2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+  }
+ 
+  
+  
+  .search-input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px #4CAF50;
+  }
+
+  .form-check-input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .form-check-input[type="radio"] + .form-check-label:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    border: 2px solid #6c757d;
+    background-color: #fff;
+    cursor: pointer;
+  }
+  
+  .form-check-input[type="radio"]:checked + .form-check-label:before {
+    background-color: #6c757d;
+  }
+  
+  .form-check-label {
+    cursor: pointer;
+    color: #fff;
+    font-size: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  .form-check {
+
+    margin-bottom: 10px;
+  }
+  .oneline{
+    display:flex; 
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  
+  .h3 {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0;
+    background-color: #0a540ac5;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    
+  }
+  
+  .h3:hover {
+    background-color: #22ef223a;
+  }
+  .messages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+   
+  }
+  
+  .alert {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .alert-fail {
+    background-color: rgba(255, 0, 0, 0.418);
+  }
+  
+  .alert-success {
+    background-color: rgba(63, 236, 63, 0.422);
+  }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #ddd;
+    margin-top: 20px;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+td:last-child {
+    width: 10%;
+    text-align: center;
+}
+
+.empty-column {
+    width: 10%;
+    text-align: center;
+}
+
+.edit-button,
+.delete-button,
+.more-button {
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 2px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 70%;
+}
+.more-button{
+  background-color: #1c42ebd1;
+}
+.edit-button {
+    background-color: #0fd615ad;
+}
+
+.delete-button {
+    background-color: #ea1000;
+}
+
+.delete:hover {
+    color: #212529;
+    text-decoration: none;
+}
+
+.edit:hover {
+    color: #212529;
+    text-decoration: none;
+}
+
+.more:hover {
+  color: #212529;
+  text-decoration: none;
+}
+
+a.gmail-link {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #6a555448;
+  color: #080808;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+}
+
+a.gmail-link:hover {
+  background-color: #30a7e873;
+}
+
+
+.tablerv.calendar-table {
+  width: 80%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+.tablerv.calendar-table th,
+.tablerv.calendar-table td {
+  padding: 10px;
+  text-align: center;
+}
+
+.tablerv.calendar-table td {
+  background-color: rgb(33, 242, 40);
+  color: #ffffffc5;
+}
+
+.tablerv.calendar-table td a {
+  display: block;
+  text-decoration: none;
+  color: black;
+}
+
+.tablerv.calendar-table td a:hover {
+  background-color: lightblue;
+}
+.image_at_center {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Set height to full viewport height */
+  background: url(your-image-url.jpg) no-repeat center center; /* Use the image as background */
+  background-size: contain; /* Adjust size of background image */
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF_8">
+    <title>Gestion PFE </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/newuserstyle.css" type="text/css">
+    
+  </head>
+  <body>
+
+    <nav>
+      <ul>
+    <li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+    <div class="main-link">
+          <li><a th:href="@{/Admin/profile}">Profil</a></li>
+          <li ><a th:href="@{/Admin/users/categorie}">Gestion des utilisateurs</a></li>
+          <li class="active"><a th:href="@{/Admin/groupes/list}">Groupes</a></li>
+          <li><a th:href="@{/Admin/appointments}">Rendez-vous</a></li>
+  </div>
+    <li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+      </ul>
+  </nav>
+
+    <div class="form-container">
+      <div class="messages">
+        <div th:if="${messagfail}" class="alert alert-fail text-center">
+            [[${messagfail}]]
+          </div>
+          <div th:if="${messagesucces}" class="alert alert-success text-center">
+            [[${messagesucces}]]
+          </div>
+      </div>
+      
+          <h2>Plus d info Sur " [[${groupedata.name}]] " Groupe PFE</h2>
+      <!-- Form for updating Groupe name and type of work and list of Etudiants is email -->
+      
+      <hr>
+          <!-- label  of Groupe id -->
+          <div class="form-field">
+            <label for="groupeidlb"> Groupe id :</label>
+            <label  id="groupeidlb"  th:text="${groupedata.id}"   ></label>
+          </div>
+
+          <!-- label  of Groupe name -->
+          <div class="form-field">
+            <label for="groupeName">Nom de Groupe :</label>
+            <label  id="groupeName" th:text="${groupedata.name}" ></label>
+          </div>
+
+           <!-- label  of Groupe Autorisation -->
+           <div class="form-field">
+            <label for="groupeautorisation">Autorisation :</label>
+            <label  id="groupeautorisation" th:text="${groupedata.autorisation}"  ></label>
+          </div>
+
+          <!-- label  of Groupe filière -->
+          <div class="form-field">
+            <label for="groupefilier">Filière :</label>
+            <label  id="groupefilier" th:text="${groupedata.filier}" ></label>
+          </div>
+
+          <!-- label  of Groupe filière -->
+          <div class="form-field">
+            <label for="groupestatus">Status :</label>
+            <label  id="groupestatus" th:text="${groupedata.status}"  ></label>
+          </div>
+
+           <!-- label  of Groupe typeOfWork -->
+           <div class="form-field">
+            <label for="groupetypeOfWork">type de travail :</label>
+            <label  id="groupetypeOfWork" th:text="${groupedata.typeOfWork}"  ></label>
+          </div>
+
+          <!-- label  of Groupe presentationDate -->
+          <div class="form-field">
+            <label for="groupepresentationDate">soutenu le :</label>
+            <div th:if="${groupedata.presentationDate}">
+                <label id="groupepresentationDate" th:text="${groupedata.presentationDate}"></label>
+            </div>
+            <div th:unless="${groupedata.presentationDate}">
+                <label><span>pas encore réservé</span></label>
+            </div>
+        </div>
+        
+  
+          
+                  <!-- inpute for data Groupe list Etudiant -->
+                  <hr>
+            <div class="form-field">
+              <h2>membre(s): </h2>
+        <table>
+            <thead>
+                <tr>
+                  <th> Nom</th>
+                  <th>Prenom</th>
+                  <th>Napogee</th>
+                  <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr th:each="etudiant : ${listetudiants}">
+                <td th:text="${etudiant.name}"></td>
+                <td th:text="${etudiant.lastname}"></td>
+                <td th:text="${etudiant.napoge}"></td>
+                <td >
+                  <a class="gmail-link" th:href="@{'/Admin/Visiter/' + ${etudiant.id} }" th:text="${etudiant.email}"></a>
+                </td>
+            </tr>              
+            </tbody>
+        </table>
+            </div>
+            
+        
+
+
+     
+            <hr>
+             
+        <h2>le groupe encadré par :</h2>
+        <div th:if="${encadrant}" > 
+           <!-- label  of Encadrant id -->
+           <div class="form-field">
+            <label for="encadrantname"> Nom :</label>
+            <label  id="encadrantname"  th:text="${encadrant.name}"   ></label>
+          </div>
+
+          <!-- label  of Encadrant name -->
+          <div class="form-field">
+            <label for="encadrantlastame">Prenom  :</label>
+            <label  id="encadrantlastname" th:text="${encadrant.lastname}" ></label>
+          </div>
+
+           <!-- label  of Encadrant Autorisation -->
+           <div class="form-field">
+            <label for="encadrantemail">Email :</label>
+            <label  id="encadrantemail"   >
+              <a th:href="@{'/Admin/Visiter/' + ${encadrant.id}}" th:text="${encadrant.email}"></a>
+
+            </label>
+          
+          </div>
+         
+
+          <!-- label  of Encadrant filière -->
+          <div class="form-field">
+            <label for="encadrantfilier">Filière :</label>
+            <label  id="encadrantfilier" th:text="${encadrant.filier}" ></label>
+          </div>
+          </div>
+        <div th:unless="${encadrant}">
+            <h3>pas encore sélectionné</h3>
+          </div>
+      
+    
+    <!-- STEP 3  Sujetdata   -->
+    <hr>
+      
+    <h2>le sujet  :</h2>
+    <div th:if="${subject}" >
+    <!-- label  of Sujet id -->
+    <div class="form-field">
+     <label for="Sujetname"> Nom :</label>
+     <label  id="Sujetname" th:text="${subject.name}"   ></label>
+   </div>
+
+   <!-- label  of Sujet name -->
+   <div class="form-field">
+     <label for="Sujetlanguage">Language  :</label>
+     <label  id="Sujetlanguage" th:text="${subject.language}" ></label>
+   </div>
+
+    <!-- label  of Sujet Autorisation -->
+    <div class="form-field">
+     <label >Fichier PDF :</label>
+     <label  ><a th:href="@{'/Admin/download/subject/' + ${subject.id}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Télécharger PDF</a></label>
+   </div>
+    </div>
+   <div th:unless="${subject}">
+    <h3>pas encore sélectionné</h3>
+  </div>
+
+      
+    
+      </div>
+  </body>
+</html>

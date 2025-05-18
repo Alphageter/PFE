@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion PFE </title>
+    <link rel="stylesheet" href="/usersstyle.css">
+</head>
+
+
+<body>
+    <nav>
+        <ul>
+            <li><a th:href="@{/Admin/profile}">Profil</a></li>
+            <li><a href="/users/categorie">Users Management</a></li>
+            <li><a href="/groupes/list">Groups</a></li>
+            <li><a href="/appointments">Appointments</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container-fluid text-center">
+        <div><h1>USERS MANAGEMENT</h1></div>
+        <div class="m-2">
+            <a class="h3" th:href="@{/users/new}">Add New User</a>
+        </div>
+        </div>
+        
+        <div th:if="${message}" class="alert alert-success text-center">
+            [[${message}]]
+          </div>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">email</th>
+                <th scope="col">status</th>
+                <th scope="col">Role</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="admin : ${listadmins}">
+                <tr>
+                    <td>[[${admin.id}]]</td>
+                    <td>[[${admin.email}]]</td>
+                    <td>[[${admin.name}]]</td>
+                    <td>[[${admin.lastname}]]</td>
+                    <td>[[${admin.validation}]]</td>
+                    <td>[[${admin.role}]]</td>
+                    <td>
+                      <a class="edit-button" th:href="@{'/users/edit/' + ${admin.id}}">Edit</a>
+                      <a class="delete-button" th:href="@{'/users/delete/' + ${admin.id}}">Delete</a>
+                    </td>
+                  </tr>
+                </th:block>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

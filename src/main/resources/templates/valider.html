@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/validerstyle.css">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>Validation</title>
+
+</head>
+<body>
+   <div class="box">
+    <div class="container">
+
+        <div class="top">
+            <span>saisissez vous les données requises</span>
+            <header>VALIDATION</header>
+        </div>
+    <form th:action="@{/validation/check}" method="post">
+        <div th:if="${errorMessage}">
+            <div class="alertmsg">
+                
+                <p th:text="${errorMessage}"></p>
+            </div>
+        </div>
+
+
+        <div class="input-field">
+            <input type="email" class="input" placeholder="Email" id=""  name="email" required>
+            <i class='bx bx-user' ></i>
+        </div>
+
+        <div class="input-field">
+            <input type="text" class="input" placeholder="Nom" id="" name="name" required>
+            <i class='bx bx-user' ></i>
+        </div>
+
+        <div class="input-field">
+            <input type="text" class="input" placeholder="Prenom" id="" name="lastname" required>
+            <i class='bx bx-user' ></i>
+        </div>
+
+        <div class="input-field">
+            <input type="Password" class="input" placeholder="Password" id="" name="password" minlength="8" required>
+            <i class='bx bx-lock-alt'></i>
+        </div>
+        <div class="input-field">
+            <input type="Password" class="input" placeholder="Passwordverify" id="" name="passwordverify" minlength="8" required>
+            <i class='bx bx-lock-alt'></i>
+        </div>
+        
+
+        <div class="input-field">
+            <input type="submit" class="submit" value="valider" id="">
+        </div>
+    </form>
+        </div>
+    </div>
+</div>  
+</body>
+</html>

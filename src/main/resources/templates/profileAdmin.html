@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Gestion PFE</title>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/profilestyle.css">
+</head>
+<body>
+
+	<nav>
+        <ul>
+			<li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+			<div class="main-link">
+          <li class="active"><a th:href="@{/Admin/profile}">Profil</a></li>
+		  <li ><a th:href="@{/Admin/users/categorie}">Gestion des utilisateurs</a></li>
+          <li><a th:href="@{/Admin/groupes/list}">Groupes</a></li>
+          <li><a th:href="@{/Admin/appointments}">Rendez-vous</a></li>
+		</div>
+			<li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+        </ul>
+    </nav>
+
+	<section class="py-5 my-5">
+		<div class="container">
+			<h1 class="mb-5">Profil PFE</h1>
+			<div class="messages">
+				<div th:if="${messagfail}" class="alert alert-fail text-center">
+					[[${messagfail}]]
+				  </div>
+				<div th:if="${messagesucces}" class="alert alert-success text-center">
+					[[${messagesucces}]]
+				  </div>
+				  <div th:if="${notificate}" class="alert alert-notify text-center">
+					<i class="fa fa-bell mr-2"></i> <!-- Replace "fa-bell" with your desired icon class -->
+					<span th:text="${notificate}"></span>
+				  </div>
+				</div>
+			<div class="bg-white shadow rounded-lg d-block d-sm-flex">
+				<div class="profile-tab-nav border-right">
+					<div class="p-4">
+						<div class="img-circle text-center mb-3">
+							<img th:src="@{${admindata.image}}" alt="Image" class="shadow">
+						</div>					
+						<h4 class="text-center" ><span th:text="${admindata.name}"></span>
+							<span th:text="${admindata.lastname}"></span>
+						</h4>
+					</div>
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="account-tab" data-toggle="pill" href="#accountinfo" role="tab" aria-controls="accountinfo" aria-selected="true">
+							<i class="fa fa-home text-center mr-1"></i> 
+							Mes données
+						</a>
+						<a class="nav-link " id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="false">
+							<i class="fa fa-edit text-center mr-1"></i> 
+							Modifier mes données
+						</a>
+						<a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">
+							<i class="fa fa-key text-center mr-1"></i> 
+							Modifier mon mot de passe
+						</a>
+						<a class="nav-link" id="image-tab" data-toggle="pill" href="#profileimage" role="tab" aria-controls="image" aria-selected="false">
+							<i class="fa fa-image text-center mr-1"></i> 
+							Modifier l'image
+						</a>
+						
+						  
+						  
+							<a class="nav-link" id="notification-tab" data-toggle="pill" href="#notification" role="tab" aria-controls="notification" aria-selected="false">
+							  <i class="fa fa-bell text-center mr-1"></i> 
+							  Notification
+							</a>
+						  
+						  
+					</div>
+				</div>
+				<div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+					<div class="tab-pane fade show active" id="accountinfo" role="tabpanel" aria-labelledby="account-tab">
+						<h3 class="mb-4">Mes données</h3>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label> Nom</label>
+								  	<label class="form-control" th:text="${admindata.name}"></label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Prenom</label>
+								  	<label class="form-control" th:text="${admindata.lastname}"></label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Email</label>
+								  	<label class="form-control" th:text="${admindata.email}"></label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Role</label>
+								  	<label class="form-control" th:text="${admindata.role}"></label>
+								</div>
+							</div>
+							
+						</div>
+						
+					</div>
+					<div class="tab-pane fade " id="account" role="tabpanel" aria-labelledby="account-tab" >
+						<form th:action= "@{/Admin/Modifierdata}" method="post" th:object="${admindata}" id="myForm">
+						<h3 class="mb-4">Modifier mes données</h3>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Nom</label>
+								  	<input type="text" class="form-control" th:field="${admindata.name}" name="name" required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Prenom</label>
+								  	<input type="text" class="form-control" th:field="${admindata.lastname}" name="lastname" required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Email</label>
+								  	<input type="email" class="form-control" th:field="${admindata.email}" name="email" required>
+								</div>
+							</div>			
+																									
+						</div>
+						<div>
+							<input type="submit" class="btn btn-primary"  value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier les données?');">
+						    <button type="button" class="btn btn-secondary"  onclick="clearForm()">Réinitialiser</button>
+						</div>
+					</form>
+											
+					</div>
+					<div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+						<form th:action= "@{/Admin/Modifierpasseword}" method="post"  id="myPasswordForm">
+						<h3 class="mb-4">Modifier mon mot de passe</h3>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Ancien mot de passe</label>
+								  	<input type="password" class="form-control" id="" name="oldpassword" minlength="8" required>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Nouveau mot de passe</label>
+								  	<input type="password" class="form-control" id="" name="newpassword" minlength="8" required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Confirmer le nouveau mot de passe</label>
+								  	<input type="password" class="form-control" id="" name="confipassword" minlength="8" required>
+								</div>
+							</div>
+						</div>
+						<div>
+							<input type="submit" class="btn btn-primary"  value="Modifier" onclick="return confirm('Êtes-vous sûr de vouloir modifier les données?');">
+						    <button type="button" class="btn btn-secondary" onclick="clearPasswordForm()">Réinitialiser</button>
+						</div>
+					</form>					
+					</div>
+					<div class="tab-pane fade" id="profileimage" role="tabpanel" aria-labelledby="profileimage-tab">
+						<form th:action="@{/Admin/ModifierImage}" method="post" enctype="multipart/form-data" id="myimageForm">
+						<h3 class="mb-4">Modifier Votre image de profil</h3>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Sélectionnez vous votre nouveaux image de profil</label>
+								  	<input  type="file" class="form-control" id="image" name="image" accept="image/png,image/jpg" required>
+								</div>
+							</div>
+						</div>
+						
+						<div>
+							<input type="submit" class="btn btn-primary"  value="Enregistrer" onclick="return confirm('Êtes-vous sûr de vouloir modifier les données?');">
+						   
+						</div>
+					</form>					
+					</div>
+					<!-- last task of profile -->
+					<div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
+						<h3 class="mb-4">Notification</h3>
+
+						<table class="table ">
+						<thead class="table-dark">
+							<tr>
+								<th colspan="3"  scope="col">Boit Email</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<th:block th:each="request : ${listrequests}">
+								<tr claas="buttom-top display">
+									<td colspan="3" class="status" style="border: none; background-color: white;" >
+										<a class="gmail-link" th:href="@{'/Admin/Visiter/' + ${request.senderID} }" th:text="${request.senderEmail}"></a>
+									</td>
+									
+								</tr>
+							<tr claas="buttom-top display">
+								<td colspan="2" class="status" th:text="'Sujet : ' +${request.status}" style="border: none;"></td>
+								
+							</tr>
+							<tr>
+								<td colspan="2" class="subject" th:text="${request.subject}" style="border: none;"></td>
+								
+								<td style="border: none;">
+									<div  th:unless="${request.seen}" style="margin-bottom: 10px;" >
+								<a th:href="@{'/Admin/markevu/'+ ${request.requestID}}">
+									<button class="btn btn-primary">VU</button>
+								</a>
+							        </div>
+									<div th:unless="${request.status == 'demander' or request.status == 'suggerer' or request.status == 'reservation'}">
+										<a th:href="@{'/Admin/deletemsg/'+ ${request.requestID}}">
+											<button class="btn btn-danger"> <i class="fa fa-trash"></i>Supprimer</button>
+										</a>
+									</div>
+								</td>
+								
+							</tr>
+							<div th:if="${request.status == 'demander' or request.status == 'suggerer' or request.status == 'reservation'}" >
+							<tr >
+								<td colspan="3" class="accept-refuse-buttons" style="border: none;">
+									<a th:href="@{'/Admin/accepter/'+ ${request.requestID}}">
+									<button class="btn btn-success">Accepter</button>
+								</a>
+								<a th:href="@{'/Admin/refuser/'+ ${request.requestID}}">
+									<button class="btn btn-danger">Refuser</button>
+								</a>
+								</td>
+							</tr>
+							</div>
+							<tr >	
+								<td colspan="3" class="buttom-border display"></td>		
+						</tr>
+						</th:block>
+							
+						</tbody>
+					</table>
+						
+						</div>
+						<!-- till here -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		function clearForm() {
+			document.getElementById("myForm").reset();
+		}
+	</script>
+	
+
+	<script>
+		function clearPasswordForm() {
+			document.getElementById("myPasswordForm").reset();
+		}
+	</script>
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

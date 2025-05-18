@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion PFE </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/usersstyle.css">
+</head>
+
+
+<body>
+  <nav>
+    <ul>
+  <li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+  <div class="main-link">
+        <li><a th:href="@{/Admin/profile}">Profil</a></li>
+    <li class="active"><a th:href="@{/Admin/users/categorie}">Gestion des utilisateurs</a></li>
+        <li><a th:href="@{/Admin/groupes/list}">Groupes</a></li>
+        <li><a th:href="@{/Admin/appointments}">Rendez-vous</a></li>
+</div>
+  <li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+    </ul>
+</nav>
+    
+    <div class="container-fluid text-center">
+        <div><h1>Gestion Des Comptes Administratifs</h1></div>
+       
+        <div class="m-2">
+            <a class="h3" th:href="@{/Admin/newAdmin}"><i class="fa fa-plus  text-center mr-1"></i>Ajouter nouvel admin</a>
+        </div>   
+        </div>
+        <div class="float-right m-2">
+            <form class="form-inline" th:action="@{/Admin/searchAdmin}" method="post">
+              <div class="form-check form-check-inline">
+                 <input class="form-check-input" type="radio" name="validation" id="validationTrue" value="true">
+                  <label class="form-check-label" for="validationTrue">Validé</label>
+                 </div>
+                  <div class="form-check form-check-inline">
+                   <input class="form-check-input" type="radio" name="validation" id="validationFalse" value="false">
+                    <label class="form-check-label" for="validationFalse">Non Validé</label> 
+              </div>
+              <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search" aria-label="Search" name="search" required>
+              <button class="btn btn-outline-success my-2 my-sm-0 search-button" type="submit" required>
+                <i class="fa fa-search  text-center mr-1"></i> Search</button>
+            </form>
+          </div>
+        <div class="messages">
+        <div th:if="${messagfail}" class="alert alert-fail text-center">
+            [[${messagfail}]]
+          </div>
+        
+        <div th:if="${messagesucces}" class="alert alert-success text-center">
+            [[${messagesucces}]]
+          </div>
+      </div>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">email</th>
+                <th scope="col">status</th>
+                <th scope="col">Role</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="admin : ${listadmins}">
+                <tr>
+                    <td>[[${admin.id}]]</td>
+                    <td>[[${admin.name}]]</td>
+                    <td>[[${admin.lastname}]]</td>
+                    <td > 
+                      <a class="gmail-link" th:href="@{'/Admin/Visiter/' + ${admin.id} }" th:text="${admin.email}"></a>
+                      </td>                   
+                    <td>[[${admin.validation}]]</td>
+                    <td>[[${admin.role}]]</td>
+                    <td>
+                      <a class="edit-button" th:href="@{'/Admin/editAdmin/' + ${admin.id}}" > <i class="fa fa-edit text-center mr-1"></i>Edit</a>
+                      <a class="delete-button" th:href="@{'/Admin/deleteAdmin/' + ${admin.id}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer les données?');">
+                       <i class="fa fa-trash text-center mr-1"></i> Delete</a>
+                    </td>
+                  </tr>
+                </th:block>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

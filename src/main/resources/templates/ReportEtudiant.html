@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF_8">
+    <title>Gestion PFE</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/newuserstyle.css" type="text/css">
+
+    <style>
+      input[type="text"] {
+        font-size: 16px;
+        height: 100px;
+        width: 300px;
+      }
+    </style>
+    
+  </head>
+  <body>
+
+    <nav>
+      <ul>
+    <li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+    <div class="main-link">
+        <li ><a th:href="@{/Etudiant/profile}">Profil</a></li>
+          <li><a th:href="@{/Etudiant/Groupe}">Mon PFE</a></li>
+    <li><a th:href="@{/Etudiant/appointment}">rendez-vous</a></li>
+    <li class="active" ><a th:href="@{/Etudiant/showreportform}"> <i class="fa fa-file-text-o"></i> Declarer</a></li>
+
+     </div>
+    <li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+    
+      </ul>
+  </nav>
+
+    <div class="myform-container">
+      <div class="messages">
+        <div th:if="${messagfail}" class="alert alert-fail text-center">
+            [[${messagfail}]]
+          </div>
+          <div th:if="${messagesucces}" class="alert alert-success text-center">
+            [[${messagesucces}]]
+          </div>
+          </div>
+      
+          <h2>Si vous rencontrez un problème, nous sommes heureux de vous aider,
+            dites-nous simplement les détails</h2>
+      
+      <form th:action="@{/Etudiant/Report}" method="post" >
+        <div class="form-field">
+          <textarea class="form-control" id="report" name="report" maxlength="150" placeholder="Décrivez votre problème" rows="4" cols="50"></textarea>
+         </div>
+        
+        <div class="form-field">
+          <input type="submit" value="Report">
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

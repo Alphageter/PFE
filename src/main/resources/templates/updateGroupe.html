@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF_8">
+    <title>Gestion PFE</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/newuserstyle.css" type="text/css">
+    
+  </head>
+  <body>
+
+    <nav>
+      <ul>
+    <li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+    <div class="main-link">
+          <li><a th:href="@{/Admin/profile}">Profil</a></li>
+          <li ><a th:href="@{/Admin/users/categorie}">Gestion des utilisateurs</a></li>
+          <li class="active"><a th:href="@{/Admin/groupes/list}">Groupes</a></li>
+          <li><a th:href="@{/Admin/appointments}">Rendez-vous</a></li>
+  </div>
+    <li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+      </ul>
+  </nav>
+
+    <div class="form-container">
+      <div class="messages">
+        <div th:if="${messagfail}" class="alert alert-fail text-center">
+            [[${messagfail}]]
+          </div>
+          <div th:if="${messagesucces}" class="alert alert-success text-center">
+            [[${messagesucces}]]
+          </div>
+      </div>
+      
+          <h2>Page de modification le Groupe PFE</h2>
+      <!-- Form for updating Groupe name and type of work and list of Etudiants is email -->
+      <div th:if="${step == 1}">
+        <form th:action="@{/Admin/editeGroupeinfo}" method="post"  th:object="${groupe}"  >
+          <!-- preservation de valeurs -->
+          <input type="hidden"  id="step" name="step" value="1" >
+          <input type="hidden"  id="groupeid" name="groupeid" th:value=${groupeid}>
+          <input type="hidden"  id="groupeid" name="groupeid" th:Value=*{id}>
+          
+          <!-- inpute for updating Groupe name -->
+          <div class="form-field">
+            <label for="groupeName">Nom de Groupe</label>
+            <input type="text"  id="groupeName" th:Value="*{name}" name="name" required>
+          </div>
+  
+          <!-- inpute for updating Groupe typeofwork -->
+          <div class="form-field">
+                <input type="radio" name="typeofwork" value="in Group" th:checked="${groupe.typeOfWork == 'in Group'}">
+                En Groupe
+              </label>
+            </div>
+            <div>
+              <label>
+                <input type="radio" name="typeofwork" value="individual" th:checked="${groupe.typeOfWork == 'individual'}" >
+                 Individuel
+              </label>
+          </div>
+                  <!-- inpute for updating Groupe list Etudiant -->
+  
+            <div class="form-field">
+              <h2>membre(s): </h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Napgee</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr >
+                    <td th:text="${etudiant1.name}"></td>
+                    <td th:text="${etudiant1.lastname}"></td>
+                    <td th:text="${etudiant1.napoge}"></td>
+                    <td><input type="email"  name="email1" th:filed="${etudiant1.email}" th:value="${etudiant1.email}" required ></td>
+                  </tr>
+                <div th:if="${etudiant2}" >
+                <tr >
+                  <td th:text="${etudiant2.name}"></td>
+                  <td th:text="${etudiant2.lastname}"></td>
+                  <td th:text="${etudiant2.napoge}"></td>
+                  <td><input type="email"  name="email2" th:filed="${etudiant2.email}" th:value="${etudiant2.email}" required ></td>        
+                </tr>
+            </div>
+               
+            </tbody>
+        </table>
+            </div>
+            
+         <div class="form-field">
+          <button type="submit" >Modifier<i class="fa fa-edit"></i></button>
+          
+        </div>
+
+
+      </form>     
+      </div>
+
+            <!-- STEP 2     -->
+            <div th:if="${step == 2}">
+            <form th:action="@{/Admin/editeGroupeEncadrant}" method="post"  >
+        <input type="hidden"  id="step" name="step" value="2">
+        <input type="hidden"  id="groupeid" name="groupeid" th:value=${groupeid}>
+        <div class="form-field">
+          <label for="encadrant">Encadrant:</label>
+            <select id="encadrantID" name="encadrantID" required >
+              <option value="">Sélectionnez votre Encadrant</option>
+                <option th:each="encadrant : ${listEcadrants}" th:value="${encadrant.id}" th:text="${encadrant.name + ' ' + encadrant.lastname}"></option>              
+            </select>
+          </div>
+        <div class="form-field">
+          
+        <button type="submit" >Modifier <i class="fa fa-chevron-right"></i></button>
+        </div>
+      </form>
+            </div>
+    
+    <!-- STEP 3    -->
+    <div th:if="${step == 3}">
+    <form th:action="@{/Admin/editeGroupeSujet}" method="post"  >
+    <input type="hidden"  id="step" name="step" value="3">
+    <input type="hidden"  id="groupeid" name="groupeid" th:value=${groupeid}>
+
+      <h2>Sujets:</h2>
+      <div class="form-field">
+      <table>
+          <thead>
+              <tr>
+                  <th>Sujets Name</th>
+                  <th>Language</th>
+                  <th>fichier PDF</th>
+                  <th>Sélectionner</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr th:each="subject : ${listsubject}">
+                  <td th:text="${subject.name}"></td>
+                  <td th:text="${subject.language}"></td>
+                  <td><a th:href="@{'/Admin/download/subject/' + ${subject.id}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Télécharger PDF</a></td>
+                  <td><input type="radio"  name="subjectID" th:value="${subject.id}" required ></td>
+              </tr>
+             
+          </tbody>
+      </table>
+    </div>
+    <div class="form-field">  
+      <button type="submit" >Modifier   <i class="fa fa-plus"></i></button>
+    </div>
+  </form>
+    </div>
+
+    <!-- STEP 4    -->
+    <div th:if="${step == 4}">
+      <div th:if="${messagefinfo}" class="alert alert-fail text-center">
+        [[${messagefinfo}]]
+      </div>
+    </div>
+    
+            
+    
+    <div class="button-next">
+      <a th:href="@{'/Admin/nextstep/'+${step}}">
+            <button type="button">SUIVANT <i class="fa fa-chevron-right"></i> </button>
+          </a>
+        </div> 
+      </div>
+  </body>
+</html>

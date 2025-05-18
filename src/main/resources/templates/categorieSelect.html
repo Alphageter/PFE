@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/categorie.css">
+   
+
+    <title>Gestion PFE</title>
+
+</head>
+<body>
+    <nav>
+        <ul>
+			<li class="logo"><img src="/images/fst_logo.jpg" alt="logo"></li>
+			<div class="main-link">
+            <li><a th:href="@{/Admin/profile}">Profil</a></li>
+        <li class="active"><a th:href="@{/Admin/users/categorie}">Gestion des utilisateurs</a></li>
+            <li><a th:href="@{/Admin/groupes/list}">Groupes</a></li>
+            <li><a th:href="@{/Admin/appointments}">Rendez-vous</a></li>
+		</div>
+			<li class="logout"><a th:href="@{/logout}"><i class="fa fa-sign-out text-center mr-1"></i>Log out</a></li>				
+        </ul>
+    </nav>
+    
+
+    
+<div class="container">
+    <h1>Sélectionnez la catégorie d'utilisateur</h1>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card p-0">
+                <a th:href="@{/Admin/listAdmin}">
+                <div class="card-image">
+                    <img src="/images/admi1.jpg" alt="">
+                </div>
+                <div class="card-content d-flex flex-column align-items-center">
+                    <h4 class="pt-2">ADMIN</h4>
+                    <h5>Compte administratif</h5>
+                </div>
+            </a>
+            </div>
+        </div><div class="col-lg-4">
+            <div class="card p-0">
+                <a th:href="@{/Admin/listEncadrant}">
+                <div class="card-image">
+                    <img src="/images/encadrant1.jpg" alt="">
+                </div>
+                <div class="card-content d-flex flex-column align-items-center">
+                    <h4 class="pt-2"> Encadrant</h4>
+                    <h5>Compte d'encadrant</h5>
+                </div>
+            </a>
+            </div>
+        </div><div class="col-lg-4">
+            <div class="card p-0">
+                <a th:href="@{/Admin/listEtudiant}">
+                <div class="card-image">
+                    <img src="/images/student.jpg" alt="">
+                </div>
+                <div class="card-content d-flex flex-column align-items-center">
+                    <h4 class="pt-2">Etudiant</h4>
+                    <h5>Compte d'étudiant</h5>
+                </div>
+            </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>
